@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base.html :: headerfiles(title='FISIOMEDICA - Dettaglio Fisiodisponibilita')"></head>
+
+	<body>
+
+		<div th:replace="fragments/base.html :: navbar"></div>
+		
+		<div class="shadow container d-flex justify-content-center align-items-center px-0" style="position: relative;">
+			<img src="/img/fisioterapia.jpg"  class="img-fluid rounded-2 flex-fill shadow-lg" alt="...">		
+		</div>		
+				
+		<div class="container px-0 mt-4 ">
+			<a sec:authorize="hasAuthority('ADMIN')"  th:href="@{'/fisioterapista/' +${fisioterapia.fisioterapista.id}}"href="/" class="mx-1 shadow-sm btn btn-primary">Visualizza Fisioterapista</a>		
+
+			<div class=" d-flex row justify-content-between m-1 shadow">
+				
+				<div class="col d-flex justify-content-center my-1 px-0">
+					<div class="card flex-grow-1">
+			  			<div class="card-body p-4">
+			   				 <h3 class="card-title d-flex justify-content-center mb-4">PRESTAZIONI</h3>		   				 
+						 	<div class="col accordion" id="accordionExample">
+								<div class="accordion-item shadow"  th:each="prestazione : ${fisioterapia.prestazioni}">
+							    	<div class="container">
+							    		<div class="row">
+							    			<div class="col-lg-8 col-md-6 col-sm-4 px-0">
+										    	<h2 class="accordion-header" th:id="'heading' + ${prestazione.id}">
+										      		<button th:text="${prestazione.name}" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+										      		        th:data-bs-target="'#collapse' + ${prestazione.id}" aria-expanded="false" th:aria-controls="'collapse' + ${prestazione.id}">
+										        		Accordion Item #2
+										      		</button>
+										    	</h2>
+							    			</div>	
+							    			<div class="d-flex col mx-4 px-0 align-items-center justify-content-center">
+							    				<a sec:authorize="hasAuthority('ADMIN')" th:href = "@{'/prestazione/edit/' + ${prestazione.id} +'/'+ ${fisioterapia.id}}" href="/" type="button" class="shadow-sm btn btn-outline-primary">
+							    					Modifica
+							    				</a>
+							    			</div>	
+							    			<div class="d-flex col me-4 px-0 justify-content-center align-items-center"> 
+								    			<a sec:authorize="hasAuthority('ADMIN')" th:href = "@{'/prestazione/delete/' + ${prestazione.id} +'/'+ ${fisioterapia.id}}" href="/" class="shadow-sm btn btn-outline-danger" aria-label="Close">
+								    				Elimina
+								    			</a>
+							    			</div>
+							    		</div>
+							    	</div>
+							    	<div th:id="'collapse' + ${prestazione.id}" class="accordion-collapse collapse" th:aria-labelledby="'heading' + ${prestazione.id}" data-bs-parent="#accordionExample">
+							    		<div class="accordion-body" th:text="|${prestazione.description} - ${prestazione.money}|"></div>
+								    	<div class="container">
+								    		<div class="row m-3">
+								    			<h3 class="mb-4">Le disponibilità presso il nostro centro:</h3>
+									    	    <ul class="list-group">
+								    	    		<li th:each="terapia: ${prestazione.terapie}" class="list-group-item shadow" >
+												 	    <div class="container">
+												 	    	<div class="row">
+												 	    		<div class="col d-flex align-items-center">
+   														 	    	<div th:text="${terapia.date} + ' ' + ${terapia.orario}">
+												 	    				Terapia
+												 	    			</div>
+												 	    		</div>
+												    			<div class="d-flex col-2 align-items-center justify-content-center">
+												    				<a sec:authorize="hasAuthority('ADMIN')" th:href = "@{'/terapia/edit/' + ${terapia.id} +'/'+ ${fisioterapia.id}}" href="/" type="button" class="shadow-sm btn btn-outline-primary">
+												    					Modifica
+												    				</a>
+												    			</div>	
+												    			<div class="d-flex col-1 justify-content-center align-items-center">
+													    			<a  sec:authorize="hasAuthority('ADMIN')" th:href = "@{'/terapia/delete/' + ${terapia.id} +'/'+ ${fisioterapia.id}}" href="/" class="shadow-sm col btn btn-outline-danger" aria-label="Close">
+													    				Elimina
+													    			</a>
+												    			</div>												 	    		
+												 	    	</div>
+												 	    </div>
+
+												 	</li>									    	    					 		
+												</ul>	
+								    		<div class="row my-5">
+								    			<div class="col-lg-4 col-sm-10">
+													<a sec:authorize="hasAuthority('ADMIN')" th:href = "@{'/terapia/add/' + ${prestazione.id} +'/'+ ${fisioterapia.id}}" href="/" class="shadow-sm btn btn-outline-primary">
+														Aggiungi nuova disponibilità
+													</a>
+								    			</div>
+								    		</div>
+								    	</div> 
+							    	</div>		    	
+							 	</div>
+							</div>	
+			  			</div>
+			  			<div class="row d-flex justify-content-center m-3">
+							<div class="d-flex col mt-4 m-2 justify-content-end">
+							<a sec:authorize="hasAuthority('ADMIN')" th:href = "@{'/prestazione/add/form/' + ${fisioterapia.id}}" href="/" class="btn btn-primary">Aggiungi Prestazione</a>
+						</div>
+					</div> 			
+				</div>				
+			</div>
+		</div>	
+		</div>	
+		</div>
+		<div th:replace="fragments/base.html :: footer"></div>
+		
+	</body>
+</html>

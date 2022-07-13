@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head th:replace="fragments/base.html :: headerfiles(title='FisioMedica - Homepage')"></head>
+
+	<body>
+
+		<div th:replace="fragments/base.html :: navbar"></div>
+		
+		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+		  <div class="carousel-indicators">
+		    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+		    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+		  </div>
+		  <div class="carousel-inner">
+		    <div class="carousel-item active">
+		      <img src="/img/tecraterapia.jpg" class="d-block w-100" alt="...">
+		    </div>
+		    <div class="carousel-item">
+		      <img src="/img/FisioMedicaSlide.jpg" class="d-block w-100" alt="...">
+		    </div>
+		  </div>
+		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		    <span class="visually-hidden">Previous</span>
+		  </button>
+		  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		    <span class="visually-hidden">Next</span>
+		  </button>
+		</div>
+		 
+		<div class="container my-5 card px-5 border border-1 shadow-lg">
+			<div class=" d-flex row justify-content-center mt-5 mb-3">
+				<h2 class="d-flex justify-content-center">STUDIO FISIOMEDICA IN BREVE </h2><br><br><br>
+				<div class="row my-4">
+					<div class="col col-md-6 mr-3" style="text-align: justify; font-weight:400; letter-spacing:1px">
+						<p><br>
+						<b><font color="#000080">CENTRO FISIOMEDICA</font></b> nasce nel 2008 come Centro fisioterapisco, divenuto poi negli anni un Studio Medico <b>POLISPECIALISTICO</b>.
+						<br><br>Punto di riferimento della diagnostica medica di Monterotondo, il <b><font color="#000080">CENTRO FISIOMEDICA</font></b> ha sempre avuto come obiettivo trasferire l'esperienza
+						maturata nel corso degli anni in un servizio fisioterapico di qualità superiore, caratterizzato da un'attenzione maniacale alle esigenze del paziente, il cui recupero
+						funzionale rappresenta l'obiettivo principale del nostro lavoro.
+						<br><br>I fisioterapisti che troverai nel <b><font color="#000080">CENTRO FISIOMEDICA</font></b> sono stati selezionati non solo sulla base delle proprie competenze professionali, ma anche sopratutto sull'attenzione,
+						l'ascolto e la cura che dedicano ai propri pazienti<br>
+						<br>L'ambiente in cui sorge il <b><font color="#000080">CENTRO FISIOMEDICA</font></b> è dotato di tutti i confort necessari, ideale per sentirsi a proprio agio e rilassarsi durante il proprio percorso riabilitativo.
+						Le apparecchiature presenti nel nostro centro sono sempre al passo con i tempi e rappresentano l'eccellenza in campo fisioterapico, permettendo di ottenere risultati già dalle prime sedute di trattamento.<br>
+						<br>Applichiamo continuamente, durante la nostra attività, un programma di controllo qualità che ha l'obiettivo di mantenere standard di soddisfazione sempre molto alti.
+						</p>
+					</div>
+					<div class="col col-md-6 justify-content-center">
+						<img class="img-about" align="center" src="https://colonnaprotetta.it/wp-content/uploads/2020/11/simobolo-fisioterapista.png">
+					</div>
+				</div>	
+			</div>
+
+		</div> 
+		
+		
+		<div class="container my-5 card px-5 border border-1 shadow-lg">
+			<div class=" d-flex row justify-content-center mt-5 mb-3">
+				<h2 class="d-flex justify-content-center">FISIOTERAPISTI FISIOMEDICA</h2>
+			</div>
+			<div class=" d-flex row justify-content-start m-1">
+				<div th:each="fisioterapista : ${fisioterapisti}" class="col-md-6 col-lg-4 d-flex justify-content-center my-1 my-md-2 my-sm-3">
+					<div class="card flex-grow-1 shadow">
+						<img src="https://smart.servier.com/wp-content/uploads/2020/01/kine-homme-orient.png" class="card-img-top container d-flex justify-content-center" style="width:70%" alt="...">
+			  			<div class="card-body">
+			   				 <h5 class="card-title" th:text="${fisioterapista.name}">Fisioterapista 1</h5>
+			   				 <h5 class="card-title" th:text="${fisioterapista.surname}">Fisioterapista</h5>
+			    			 <p class="card-text" th:text="${fisioterapista.eta}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+			    			 <div class="container">
+			    			 	<div class="row d-flex justify-content-center px-3 mt-4 mb-2">
+			    					<a sec:authorize="isAuthenticated()" th:href = "@{'/fisioterapista/' + ${fisioterapista.id}}" href="/" class="shadow btn btn-primary">
+			    						Dettagli Fisioterapista
+			    					</a>			    					
+			    			 	</div>		    			 					    			 
+			    			 </div>
+			  			</div>
+					</div> 			
+				</div>				
+			</div>	
+			<div class=" d-flex row justify-content-end m-3">
+				<div class ="col col-lg-3 d-flex justify-content-end p-0 mt-4 mb-2">
+					<a th:href = "@{/fisioterapista/all}" href="/" class="btn btn-outline-warning shadow btn-lg">
+				    	Visualizza lista completa
+				    </a>				
+				</div>
+			</div>	
+		</div>
+		
+		
+		<div class="container my-4  card px-5 border border-1 shadow-lg">
+			<div class=" d-flex row justify-content-center mt-5 mb-3">
+				<h2 class="d-flex justify-content-center">FISIOTERAPIE</h2>
+			</div>
+			<div class=" d-flex row justify-content-start m-1">
+				<div th:each="fisioterapia : ${fisioterapie}" class="col-md-6 col-lg-4 d-flex justify-content-center my-1 my-md-2 my-sm-3">
+					<div class="card flex-grow-1">
+						<img src="/img/fisioterapia.jpg" class="card-img-top" alt="...">
+			  			<div class="card-body">
+			   				 <h5 class="card-title" th:text="${fisioterapia.name}">Fisioterapia 1</h5>
+			    			 <p style="height:80px; overflow:hidden" class="card-text" th:text="${fisioterapia.description}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+			    			 <div class="container">
+			    			 	<div class="row d-flex justify-content-center px-3 mt-4 mb-2">
+			    					<a sec:authorize="isAuthenticated()" th:href = "@{'/fisioterapia/' + ${fisioterapia.id}}" href="/" class="btn btn-primary">
+			    						Dettagli fisioterapia
+			    					</a>			    					
+			    			 	</div>		    			 					    			 
+			    			 </div>
+			  			</div>
+					</div> 			
+				</div>				
+			</div>	
+			<div class=" d-flex row justify-content-end m-3">
+				<div class ="col col-lg-3 d-flex justify-content-end p-0 mt-4 mb-2">
+					<a th:href = "@{/fisioterapia/all}" href="/" class="btn btn-outline-warning btn-lg">
+				    	Visualizza lista completa
+				    </a>				
+				</div>
+			</div>	
+		</div>
+		<div th:replace="fragments/base.html :: footer"></div>
+
+	</body>
+</html>

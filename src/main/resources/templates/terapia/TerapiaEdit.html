@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head th:replace="fragments/base.html :: headerfiles(title='FISIOMEDICA - Modifica Data Terapia')"></head>
+
+	<body>
+
+		<div th:replace="fragments/base.html :: navbar"></div>	
+		
+		<div class="d-flex container justify-content-center">
+			<div class="col-lg-6 card shadow" >
+				<h3 class="card-title m-3 d-flex justify-content-center">MODIFICA DISPONIBILITA' TERAPIA SELEZIONATA</h3>
+				<form th:action="@{'/terapia/edit/' + ${terapia.id} + '/'+ ${fisioterapiaId}}" method="post" class="m-3">
+				  <div class="mb-4 px-3">
+				    <label class="form-label">Nuova Data</label>
+				    <input th:field="${terapia.date}" type="date" required class="form-control shadow">
+				  </div>
+				  <div class="mb-4 px-3">
+				    <label class="form-label">Orario</label>
+				    <input th:field="${terapia.orario}" type="time" required class="form-control shadow">
+				  </div>
+				  <a  th:href="@{'/fisioterapia/' + ${fisioterapiaId}}" href="/" class="btn btn-danger">Annulla</a>
+				  <button type="submit" class="btn btn-success">Apporta Modifiche</button>
+				</form>				
+			</div>
+		</div>			
+		<div th:replace="fragments/base.html :: footer"></div>
+	</body>
+</html>

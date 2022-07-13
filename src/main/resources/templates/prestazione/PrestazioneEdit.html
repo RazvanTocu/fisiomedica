@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head th:replace="fragments/base.html :: headerfiles(title='FISIOMEDICA - Modifica Prestazione')"></head>
+
+	<body>
+
+		<div th:replace="fragments/base.html :: navbar"></div>	
+				
+		<div class="d-flex container justify-content-center">
+			<div class="col-lg-6 card" >
+				<h3 class="card-title m-3 d-flex justify-content-center">MODIFICA LA PRESTAZIONE SELEZIONATA</h3>				
+				<form th:action="@{'/prestazione/edit/'+ ${prestazione.id} + '/' + ${idFisioterapia}}" method="post" class="m-3">
+				  <div class="mb-4 px-3">
+				    <label class="form-label">Nuovo Nome</label>
+				    <input th:field="${prestazione.name}" type="text" required class="form-control shadow">
+				  </div>
+				  <div class="mb-4 px-3">
+				    <label class="form-label">Descrizione</label>
+				    <input th:field="${prestazione.description}" type="text" required class="form-control shadow">
+				  </div>
+				  <div class="mb-4 px-3">
+				    <label class="form-label">Costo</label>
+				    <input th:field="${prestazione.money}" type="text" required class="form-control shadow">
+				  </div>
+				  <a  th:href="@{'/fisioterapia/' + ${idFisioterapia}}" href="/" class="shadow btn btn-danger">Annulla</a>
+				  <button type="submit" class="shadow btn btn-success">Apporta modifiche</button>
+				</form>				
+			</div>
+		</div>		
+			
+	</body>
+</html>
